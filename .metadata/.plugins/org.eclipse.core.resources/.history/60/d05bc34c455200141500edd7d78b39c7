@@ -1,0 +1,9 @@
+
+public class Tile {
+	
+	private Tile[] neighbors;
+	private int value;
+	private int line;
+	private int column;
+
+}

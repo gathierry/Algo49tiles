@@ -1,0 +1,18 @@
+
+public class Tile {
+	
+	private Tile[] neighbors;
+	private int value;
+	private int row;
+	private int column;
+	
+	public Tile(int r, int c) {
+		this.row = r;
+		this.column = c;
+		if ((r == 0 && c == 0) || (r == 0 && c == 6) || (r == 6 && c == 0) || (r == 6 && c == 6)) {
+			this.value = 2;
+		}
+		if ((r + c == 1) || (Math.abs(r - c) == 5) || (Math.abs(r + c) == 11))
+	}
+
+}
