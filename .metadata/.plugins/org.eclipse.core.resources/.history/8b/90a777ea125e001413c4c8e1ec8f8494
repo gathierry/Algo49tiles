@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+
+public class Tile {
+	
+	private ArrayList<Tile> neighbors;
+	private int value;
+	private int row;
+	private int column;
+	private boolean colored;
+	
+	public Tile(int r, int c) {
+		this.row = r;
+		this.column = c;
+		this.colored = false;
+		this.neighbors = new ArrayList<Tile>();
+	}
+	
+	public void addNeighbor(Tile tile) {
+		this.neighbors.add(tile);
+		this.value = this.neighbors.size();
+	}
+	
+	public String toString() {
+		return "(" + this.row + "," + this.column + ")" + "-" + this.value;
+	}
+	
+}
