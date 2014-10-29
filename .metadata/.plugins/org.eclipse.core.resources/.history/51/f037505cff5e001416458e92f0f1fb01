@@ -45,7 +45,7 @@ public class Tile {
 			painter.setPixel(this.column, 6 - this.row, true);
 		}
 		Tile next = this.searchMinimum();
-		for (int i = 0; this.neighbors.size() != 0; ) {
+		for (int i = 0; i < this.neighbors.size(); i++) {
 			this.neighbors.get(i).removeNeighbor(this);
 		}
 		return next;

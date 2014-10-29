@@ -69,6 +69,7 @@ public class GameRun {
 	public static int run(int startRow, int startColumn) {
 		Tile[][] tiles = initTiles();
 		Tile t = tiles[startRow][startColumn].color(null);
+
 		while (t != null) {
 			t = t.color(null);
 		}
@@ -85,9 +86,9 @@ public class GameRun {
 		System.out.println(number);
 		return number;
 	}
-
+	
 	public static int goodTiles() {
-		Painter painter = new Painter(length, length);
+		Painter painter = new Painter(length,length);
 		int good = 0;
 		for (int i = 0; i < length; i++) { // row
 			for (int j = 0; j < length; j++) { // column
@@ -95,7 +96,7 @@ public class GameRun {
 				int startColumn = j;
 				if (run(startRow, startColumn) == 49) {
 					painter.setPixel(startColumn, 6 - startRow, true);
-					good++;
+					good ++;
 				}
 			}
 		}
@@ -110,7 +111,9 @@ public class GameRun {
 		// runGraphical(startRow, startColumn);
 		// run(startRow, startColumn)
 		System.out.println(goodTiles());
-
+		
+		
+		
 	}
 
 }

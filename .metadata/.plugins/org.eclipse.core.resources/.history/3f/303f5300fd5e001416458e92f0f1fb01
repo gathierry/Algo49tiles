@@ -21,22 +21,13 @@ public class Tile {
 	}
 
 	public void addNeighbor(Tile tile) {
-		if (this.neighbors.indexOf(tile) == -1) {
-			this.neighbors.add(tile);
-		}
+		this.neighbors.add(tile);
 		this.value = this.neighbors.size();
-
-		if (tile.neighbors.indexOf(this) == -1) {
-			tile.neighbors.add(this);
-		}
-		tile.value = tile.neighbors.size();
 	}
 
-	private void removeNeighbor(Tile tile) {
+	public void removeNeighbor(Tile tile) {
 		this.neighbors.remove(tile);
 		this.value = this.neighbors.size();
-		tile.neighbors.remove(this);
-		tile.value = tile.neighbors.size();
 	}
 
 	public Tile color(Painter painter) {
@@ -44,15 +35,14 @@ public class Tile {
 		if (painter != null) {
 			painter.setPixel(this.column, 6 - this.row, true);
 		}
-		Tile next = this.searchMinimum();
-		for (int i = 0; this.neighbors.size() != 0; ) {
-			this.neighbors.get(i).removeNeighbor(this);
+		for (int i = 0; i < this.neighbors.size(); i++) {
+			((Tile) this.neighbors.get(i)).removeNeighbor(this);
 		}
-		return next;
+		return this.searchMinimum();
 	}
 
 	public Tile searchMinimum() {
-		if (this.neighbors.size() == 0) {
+		if (this.neighbors.size() == 0){
 			return null;
 		}
 		Tile minTile = this.neighbors.get(0);
