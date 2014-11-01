@@ -1,0 +1,88 @@
+import java.util.ArrayList;
+import interaction.Painter;
+
+public class Tile {
+	
+	private ArrayList<Tile> neighbors;
+	private int value;
+	private int row;
+	private int column;
+	private boolean colored;
+	private Tile preTile;
+	private int distance;
+
+	public Tile(int r, int c) {
+		this.row = r;
+		this.column = c;
+		this.colored = false;
+		this.neighbors = new ArrayList<Tile>();
+	}
+
+	public boolean getColored() {
+		return this.colored;
+	}
+
+	public void addNeighbor(Tile tile) {
+		if (this.neighbors.indexOf(tile) == -1) {
+			this.neighbors.add(tile);
+		}
+		this.value = this.neighbors.size();
+
+		if (tile.neighbors.indexOf(this) == -1) {
+			tile.neighbors.add(this);
+		}
+		tile.value = tile.neighbors.size();
+	}
+
+	private void removeNeighbor(Tile tile) {
+		this.neighbors.remove(tile);
+		this.value = this.neighbors.size();
+		tile.neighbors.remove(this);
+		tile.value = tile.neighbors.size();
+	}
+
+	public Tile color(Painter painter) {
+		this.colored = true;
+		if (painter != null) {
+			painter.setPixel(this.column, 6 - this.row, true);
+		}
+		Tile next = this.searchMinimum();
+		for (int i = 0; this.neighbors.size() != 0; ) {
+			this.neighbors.get(i).removeNeighbor(this);
+		}
+		return next;
+	}
+
+	public Tile searchMinimum() {
+		if (this.neighbors.size() == 0) {
+			return null;
+		}
+		Tile minTile = this.neighbors.get(0);
+		for (Tile t0 : this.neighbors) {
+			if (t0.value < minTile.value) {
+				minTile = t0;
+			}
+		}
+		return minTile;
+	}
+
+	private void initSingleSource(Tile[][] tiles) {
+		for (int i = 0; i < tiles.length; i++) { // row
+			for (int j = 0; j < tiles[0].length; j++) { // column
+				tiles[i][j].distance = 9999;
+				tiles[i][j].preTile = null;
+			}
+		}
+		this.distance = 0;
+	}
+	
+	public void dijkstra() {
+		
+	}
+	
+	public String toString() {
+		return "(" + this.row + "," + this.column + ")" + "-" + this.value
+				+ "-" + this.colored;
+	}
+
+}

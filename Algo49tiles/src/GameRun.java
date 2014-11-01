@@ -1,5 +1,6 @@
 import interaction.Input;
 import interaction.Painter;
+import java.util.ArrayList;
 
 public class GameRun {
 
@@ -41,6 +42,28 @@ public class GameRun {
 			}
 		}
 		return tiles;
+	}
+
+	public static ArrayList<Tile> minTile(Tile[][] tiles, Tile exception) {
+		Tile t = new Tile();
+		ArrayList<Tile> minTiles = new ArrayList<Tile>();
+		for (int i = 0; i < tiles.length; i++) { // row
+			for (int j = 0; j < tiles[0].length; j++) { // column
+				if (!tiles[i][j].getColored()
+						&& tiles[i][j].getValue() < t.getValue()
+						&& !tiles[i][j].equals(exception)) {
+					t = tiles[i][j];
+					minTiles.removeAll(minTiles);
+					minTiles.add(t);
+				}
+				if (!tiles[i][j].getColored()
+						&& tiles[i][j].getValue() == t.getValue()
+						&& !tiles[i][j].equals(exception)) {
+					minTiles.add(tiles[i][j]);
+				}
+			}
+		}
+		return minTiles;
 	}
 
 	public static int runGraphical(int startRow, int startColumn) {
@@ -86,6 +109,28 @@ public class GameRun {
 		return number;
 	}
 
+	public static int dijkstraRun(int startRow, int startColumn) {
+		Tile[][] tiles = initTiles();
+		//Painter painter = new Painter(tiles.length, tiles[0].length);
+		Tile t = tiles[startRow][startColumn].color(null);
+		while (t != null) {
+			ArrayList<Tile> destinations = minTile(tiles, t);
+			//painter.delay(3000);
+			t = t.colorTileArray(t.djikstra(tiles, destinations), null);
+		}
+
+		int number = 0;
+		for (int i1 = 0; i1 < tiles.length; i1++) { // row
+			for (int j1 = 0; j1 < tiles[0].length; j1++) { // column
+				if (tiles[i1][j1].getColored())
+					number++;
+			}
+		}
+		System.out.println("[" + startRow + ", " + startColumn + "]");
+		System.out.println(number);
+		return number;
+	}
+
 	public static int goodTiles() {
 		Painter painter = new Painter(length, length);
 		int good = 0;
@@ -93,7 +138,8 @@ public class GameRun {
 			for (int j = 0; j < length; j++) { // column
 				int startRow = i;
 				int startColumn = j;
-				if (run(startRow, startColumn) == 49) {
+				// if (run(startRow, startColumn) == 49) {
+				if (dijkstraRun(startRow, startColumn) == 49) {
 					painter.setPixel(startColumn, 6 - startRow, true);
 					good++;
 				}
@@ -108,9 +154,10 @@ public class GameRun {
 		// int startRow = Input.readInt("startRow");
 		// int startColumn = Input.readInt("startColumn");
 		// runGraphical(startRow, startColumn);
-		// run(startRow, startColumn)
-		System.out.println(goodTiles());
-
+		// run(startRow, startColumn);
+		// dijkstraRun(startRow, startColumn);
+		 System.out.println(goodTiles());
+		
 	}
 
 }
