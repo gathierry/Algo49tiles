@@ -72,7 +72,7 @@ public class GameRun {
 		Tile t = tiles[startRow][startColumn].color(painter);
 
 		while (t != null) {
-			painter.delay(1000);
+			painter.delay(3000);
 			t = t.color(painter);
 		}
 

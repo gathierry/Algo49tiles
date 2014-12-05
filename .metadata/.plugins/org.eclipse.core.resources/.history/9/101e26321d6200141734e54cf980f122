@@ -72,7 +72,7 @@ public class GameRun {
 		Tile t = tiles[startRow][startColumn].color(painter);
 
 		while (t != null) {
-			painter.delay(1000);
+			painter.delay(3000);
 			t = t.color(painter);
 		}
 
@@ -111,11 +111,11 @@ public class GameRun {
 
 	public static int dijkstraRun(int startRow, int startColumn) {
 		Tile[][] tiles = initTiles();
-		// Painter painter = new Painter(tiles.length, tiles[0].length);
+		//Painter painter = new Painter(tiles.length, tiles[0].length);
 		Tile t = tiles[startRow][startColumn].color(null);
 		while (t != null) {
 			ArrayList<Tile> destinations = minTile(tiles, t);
-			// painter.delay(3000);
+			//painter.delay(3000);
 			t = t.colorTileArray(t.djikstra(tiles, destinations), null);
 		}
 
@@ -138,8 +138,8 @@ public class GameRun {
 			for (int j = 0; j < length; j++) { // column
 				int startRow = i;
 				int startColumn = j;
-				if (run(startRow, startColumn) == 49) {
-					// if (dijkstraRun(startRow, startColumn) == 49) {
+				// if (run(startRow, startColumn) == 49) {
+				if (dijkstraRun(startRow, startColumn) == 49) {
 					painter.setPixel(startColumn, 6 - startRow, true);
 					good++;
 				}
@@ -149,15 +149,15 @@ public class GameRun {
 	}
 
 	public static void main(String[] args) {
-		 int startRow = (int) (7 * Math.random());
-		 int startColumn = (int) (7 * Math.random());
+		// int startRow = (int) (7 * Math.random());
+		// int startColumn = (int) (7 * Math.random());
 		// int startRow = Input.readInt("startRow");
 		// int startColumn = Input.readInt("startColumn");
-		 runGraphical(startRow, startColumn);
+		// runGraphical(startRow, startColumn);
 		// run(startRow, startColumn);
 		// dijkstraRun(startRow, startColumn);
-		// System.out.println(goodTiles());
-
+		 System.out.println(goodTiles());
+		
 	}
 
 }
