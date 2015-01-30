@@ -9,6 +9,8 @@ public class Tile {
 	private int row;
 	private int column;
 	private boolean colored;
+	private Tile preTile;
+	private int distance;
 
 	public Tile() {
 		this.value = 999;
@@ -72,6 +74,18 @@ public class Tile {
 		}
 		return minTile;
 	}
+
+	private void initSingleSource(Tile[][] tiles) {
+		for (int i = 0; i < tiles.length; i++) { // row
+			for (int j = 0; j < tiles[0].length; j++) { // column
+				tiles[i][j].distance = 9999;
+				tiles[i][j].preTile = null;
+			}
+		}
+		this.distance = 0;
+	}
+
+
 
 	public Tile colorTileArray(ArrayList<Tile> tileArray, Painter painter) {
 		if (tileArray == null) {

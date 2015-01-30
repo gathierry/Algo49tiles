@@ -9,6 +9,8 @@ public class Tile {
 	private int row;
 	private int column;
 	private boolean colored;
+	private Tile preTile;
+	private int distance;
 
 	public Tile() {
 		this.value = 999;

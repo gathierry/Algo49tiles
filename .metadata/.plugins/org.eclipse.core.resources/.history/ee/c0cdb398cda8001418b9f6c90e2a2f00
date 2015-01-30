@@ -72,7 +72,7 @@ public class GameRun {
 		Tile t = tiles[startRow][startColumn].color(painter);
 
 		while (t != null) {
-			Painter.delay(1000);
+			painter.delay(1000);
 			t = t.color(painter);
 		}
 
@@ -131,10 +131,9 @@ public class GameRun {
 		 int startColumn = (int) (7 * Math.random());
 		// int startRow = Input.readInt("startRow");
 		// int startColumn = Input.readInt("startColumn");
-		
 		// runGraphical(startRow, startColumn);
 		// run(startRow, startColumn);
-		// System.out.println(goodTiles());
+		 System.out.println(goodTiles());
 
 	}
 

@@ -132,7 +132,7 @@ public class GameRun {
 		// int startRow = Input.readInt("startRow");
 		// int startColumn = Input.readInt("startColumn");
 		
-		// runGraphical(startRow, startColumn);
+		 runGraphical(startRow, startColumn);
 		// run(startRow, startColumn);
 		// System.out.println(goodTiles());
 
