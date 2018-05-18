@@ -127,14 +127,14 @@ public class GameRun {
 	}
 
 	public static void main(String[] args) {
-		 int startRow = (int) (7 * Math.random());
-		 int startColumn = (int) (7 * Math.random());
-		// int startRow = Input.readInt("startRow");
-		// int startColumn = Input.readInt("startColumn");
+//		 int startRow = (int) (7 * Math.random());
+//		 int startColumn = (int) (7 * Math.random());
+		 int startRow = Input.readInt("startRow");
+		 int startColumn = Input.readInt("startColumn");
 		
-		// runGraphical(startRow, startColumn);
-		// run(startRow, startColumn);
-		// System.out.println(goodTiles());
+		 runGraphical(startRow, startColumn);
+//		 run(startRow, startColumn);
+//		 System.out.println(goodTiles());
 
 	}
 
